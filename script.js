@@ -2,31 +2,32 @@
 window.addEventListener("load", function() {
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
       response.json().then(function(json) {
-         console.log(response);
-         let missionTarget  = document.getElementById("missionTarget");
-         for(let i = 0; i < json.length; i++) {
+         let missionTarget  = document.getElementById("missionTarget"); 
+            function index(json) {
+               return json[Math.floor(Math.random()*json.length)];
+            }   
             missionTarget.innerHTML += ` 
-               <div class = "Name">
-                  <h3>${json[i].name}</h3>
-                     <ul>
-                        <li>Diameter: ${json[i].diameter}</li>
-                        <li>Star: ${json[i].star}</li>
-                        <li>Distance: ${json[i].distance}</li>
-                        <li>Image: ${json[i].image}</li>
-                        <li>Moons: ${json[i].moons}</li>
-                     </ul>
-                    <img class="image" src="${json[i].image}"></img>
+               <div>
+                  <h2>Mission Destination</h2>
+                     <ol>
+                        <li>Name: ${index(json).name}</li>
+                        <li>Diameter: ${index(json).diameter}</li>
+                        <li>Star: ${index(json).star}</li>
+                        <li>Distance: ${index(json).distance}</li>
+                        <li>Moons: ${index(json).moons}</li>
+                     </ol>
+                    <img class="image" src="${index(json).image}"></img>
                   </div>
                `
-            }   
+            })   //index selects random and data = json.name,
          })
       });
-   });
+   
 
 
    
    let form = document.querySelector("form");
-   form.addEventListener("formsubmit", function(event) {
+   form.addEventListener("Submit", function(event) {
       event.preventDefault();
       let pilotNameInput = document.querySelector("input[name=pilotName]");
       let copilotNameInput = document.querySelector("input[name=copilotName]");
@@ -40,9 +41,9 @@ window.addEventListener("load", function() {
       let fuelStatus = document.getElementById(fuelStatus);
       let cargoStatus = document.getElementById(cargoStatus);
 
-      if(pilotNameInput.value === null || copilotNameInput.value === null || fuelLevelInput.value === null || cargoMassInput.value === null) {
+      if(pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
         alert("All fields are required!");         
-      } else if (isNaN(fuelLevelInput.value) === true || fuelLevelInput.value <= 0 || isNaN(cargoMassInput) === true || cargoMassInput.value <= 0) {
+      } /*else if (isNaN(fuelLevelInput.value) === true || fuelLevelInput.value <= 0 || isNaN(cargoMassInput) === true || cargoMassInput.value <= 0) {
          alert("Please insert a valid number for fuel!")
       } else 
          (faultyItems.style.visibility = "visible");
@@ -71,7 +72,7 @@ window.addEventListener("load", function() {
       }) 
       
    });
-
+*/
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
 <ol>
@@ -83,3 +84,4 @@ window.addEventListener("load", function() {
 </ol>
 <img src="${}">
 */
+   });
