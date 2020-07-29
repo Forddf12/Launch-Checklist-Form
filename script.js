@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
          })
    // Function to check letters and numbers
 function alpha(name) {
- let letters = /^[a-zA-Z]+$/;
+ let letters = /^[a-zA-Z a-zA-Z]+$/;
  if(name.value.match(letters)) {
    return true;
   } else { 
